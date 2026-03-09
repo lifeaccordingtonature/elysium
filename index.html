@@ -1,399 +1,506 @@
 <!doctype html>
 <html lang="ru">
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Tonviewer Clone</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-	<style>
-		:root {
-			--bg: #0b1217;
-			--bg-soft: #111c24;
-			--card: #12212b;
-			--line: #233743;
-			--text: #e8f4ff;
-			--muted: #95adbc;
-			--accent: #39a4ff;
-			--accent-soft: #19364a;
-			--green: #2fd08f;
-			--orange: #ffb357;
-		}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elysium: minecraft crypto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #eef3f8;
+      --bg-2: #e7edf4;
+      --panel: #ffffff;
+      --line: #d7e2ee;
+      --text: #142235;
+      --muted: #67819c;
+      --brand: #1598ff;
+      --shadow-soft: 0 16px 34px -20px rgba(26, 66, 110, 0.35);
+      --shadow-card: 0 8px 20px -14px rgba(20, 44, 70, 0.24);
+    }
 
-		* {
-			box-sizing: border-box;
-		}
+    * {
+      box-sizing: border-box;
+    }
 
-		body {
-			margin: 0;
-			font-family: "Space Grotesk", sans-serif;
-			background:
-				radial-gradient(circle at 10% -10%, #163247 0%, transparent 45%),
-				radial-gradient(circle at 95% 0%, #103540 0%, transparent 35%),
-				var(--bg);
-			color: var(--text);
-			min-height: 100vh;
-		}
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at -5% 5%, #d7e7fb 0, #e9f0f8 36%, transparent 60%),
+        radial-gradient(circle at 98% 1%, #d9ecff 0, #edf3f9 28%, transparent 56%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
+      min-height: 100vh;
+    }
 
-		.container {
-			width: min(1180px, calc(100% - 2rem));
-			margin: 0 auto;
-		}
+    .container {
+      width: min(1220px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
 
-		header {
-			position: sticky;
-			top: 0;
-			backdrop-filter: blur(8px);
-			background: color-mix(in srgb, var(--bg) 85%, transparent);
-			border-bottom: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
-			z-index: 10;
-		}
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #f6f9fc;
+      border-bottom: 1px solid #dce6f1;
+      box-shadow: 0 6px 18px -16px rgba(10, 32, 56, 0.4);
+    }
 
-		.nav {
-			min-height: 64px;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 1rem;
-		}
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 0;
+    }
 
-		.brand {
-			display: inline-flex;
-			align-items: center;
-			gap: 0.6rem;
-			font-weight: 700;
-			letter-spacing: 0.02em;
-			text-decoration: none;
-			color: var(--text);
-			font-size: 1.15rem;
-		}
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.08rem;
+      color: var(--text);
+      letter-spacing: 0.01em;
+    }
 
-		.brand-dot {
-			width: 12px;
-			height: 12px;
-			border-radius: 50%;
-			background: linear-gradient(130deg, #7ad7ff, #37a0ff 65%, #1f5b8d);
-			box-shadow: 0 0 20px #39a4ff77;
-		}
+    .logo {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(130deg, #36b4ff 0, #0d87f4 60%, #0d60c1 100%);
+      box-shadow: 0 0 0 4px #dff0ff;
+    }
 
-		.menu {
-			display: flex;
-			align-items: center;
-			gap: 1rem;
-			color: var(--muted);
-			font-size: 0.92rem;
-		}
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
 
-		.menu a {
-			text-decoration: none;
-			color: inherit;
-		}
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #35506b;
+      padding: 0.48rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid #d6e3f0;
+      background: #ffffff;
+    }
 
-		.hero {
-			padding: 1.8rem 0 1rem;
-		}
+    .nav-links a.active {
+      color: #ffffff;
+      border-color: var(--brand);
+      background: linear-gradient(180deg, #21a5ff, #0c83f0);
+    }
 
-		.search {
-			display: grid;
-			grid-template-columns: 1fr auto;
-			gap: 0.65rem;
-			background: linear-gradient(180deg, #0f1d26, #10212c);
-			border: 1px solid var(--line);
-			border-radius: 12px;
-			padding: 0.55rem;
-			margin-bottom: 1rem;
-		}
+    main {
+      padding: 1rem 0 1.4rem;
+    }
 
-		.search input {
-			width: 100%;
-			border: none;
-			background: #0d1a22;
-			color: var(--text);
-			border-radius: 9px;
-			padding: 0.85rem 0.95rem;
-			font-size: 0.95rem;
-			outline: none;
-		}
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
 
-		.search button {
-			border: 0;
-			border-radius: 9px;
-			padding: 0 1rem;
-			font-weight: 600;
-			font-family: inherit;
-			color: #03121e;
-			background: linear-gradient(110deg, #8dd6ff, #39a4ff);
-			cursor: pointer;
-		}
+    .search {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.55rem;
+      padding: 0.5rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow-soft);
+    }
 
-		.kpis {
-			display: grid;
-			grid-template-columns: repeat(4, minmax(0, 1fr));
-			gap: 0.65rem;
-		}
+    .search input {
+      width: 100%;
+      border: 1px solid #e3ebf3;
+      background: #f8fbff;
+      border-radius: 11px;
+      padding: 0.82rem 0.92rem;
+      font-family: inherit;
+      font-size: 0.94rem;
+      color: var(--text);
+      outline: none;
+    }
 
-		.pill {
-			border: 1px solid var(--line);
-			background: linear-gradient(180deg, #12202a, #101a23);
-			border-radius: 10px;
-			padding: 0.72rem;
-		}
+    .search input:focus {
+      border-color: #9ecfff;
+      box-shadow: 0 0 0 3px #d8ecff;
+    }
 
-		.pill .label {
-			color: var(--muted);
-			font-size: 0.74rem;
-			text-transform: uppercase;
-			letter-spacing: 0.08em;
-			margin-bottom: 0.25rem;
-		}
+    .search button {
+      border: 0;
+      border-radius: 11px;
+      padding: 0 1rem;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: linear-gradient(180deg, #29abff, #0e84f0);
+      cursor: pointer;
+    }
 
-		.pill .value {
-			font-weight: 700;
-			font-size: 1.06rem;
-		}
+    .quick-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
 
-		.grid {
-			display: grid;
-			grid-template-columns: 1.45fr 1fr;
-			gap: 0.85rem;
-			margin: 1rem 0;
-		}
+    .quick-buttons button {
+      border: 1px solid #d5e3f0;
+      background: #ffffff;
+      color: #3d5a76;
+      border-radius: 12px;
+      padding: 0 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+    }
 
-		.card {
-			border: 1px solid var(--line);
-			background: linear-gradient(180deg, #11202a 0%, #101b23 100%);
-			border-radius: 12px;
-			padding: 1rem;
-			box-shadow: inset 0 1px 0 #ffffff0f;
-		}
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin-bottom: 0.9rem;
+    }
 
-		h2 {
-			margin: 0 0 0.2rem;
-			font-size: 1rem;
-			font-weight: 700;
-		}
+    .mini-tile {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.72rem;
+      box-shadow: var(--shadow-card);
+    }
 
-		.sub {
-			margin: 0 0 1rem;
-			color: var(--muted);
-			font-size: 0.85rem;
-		}
+    .mini-tile .name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
 
-		.bars {
-			display: grid;
-			grid-template-columns: repeat(48, 1fr);
-			gap: 3px;
-			align-items: end;
-			height: 170px;
-		}
+    .mini-tile .val {
+      font-size: 1.08rem;
+      font-weight: 800;
+    }
 
-		.bar {
-			background: linear-gradient(180deg, #49b3ff, #1d6797);
-			border-radius: 3px 3px 0 0;
-			opacity: 0;
-			transform: translateY(8px);
-			animation: rise 0.55s ease forwards;
-		}
+    .layout {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 0.85rem;
+    }
 
-		.chart-footer {
-			margin-top: 0.8rem;
-			display: flex;
-			justify-content: space-between;
-			color: var(--muted);
-			font-size: 0.75rem;
-			font-family: "IBM Plex Mono", monospace;
-		}
+    .panel {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 0.95rem;
+      box-shadow: var(--shadow-card);
+    }
 
-		.donut-wrap {
-			display: grid;
-			grid-template-columns: auto 1fr;
-			gap: 1rem;
-			align-items: center;
-		}
+    h2 {
+      margin: 0;
+      font-size: 0.98rem;
+      font-weight: 800;
+    }
 
-		.donut {
-			width: 140px;
-			aspect-ratio: 1;
-			border-radius: 50%;
-			background: conic-gradient(
-				#3aa9ff 0 14%,
-				#66c1ff 14% 27%,
-				#8fd6ff 27% 39%,
-				#2fd08f 39% 50%,
-				#ffb357 50% 60%,
-				#2a3b48 60% 100%
-			);
-			position: relative;
-			margin: 0 auto;
-		}
+    .sub {
+      margin: 0.16rem 0 0.95rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
 
-		.donut::after {
-			content: "";
-			position: absolute;
-			inset: 23px;
-			border-radius: 50%;
-			background: #0f1921;
-			border: 1px solid var(--line);
-		}
+    .bars {
+      display: grid;
+      grid-template-columns: repeat(56, 1fr);
+      gap: 3px;
+      align-items: end;
+      height: 180px;
+    }
 
-		.legend {
-			display: grid;
-			gap: 0.45rem;
-			margin: 0;
-			padding: 0;
-			list-style: none;
-			font-size: 0.82rem;
-		}
+    .bar {
+      background: linear-gradient(180deg, #52bcff 0%, #168eef 100%);
+      border-radius: 3px 3px 0 0;
+      opacity: 0;
+      transform: translateY(7px);
+      animation: rise 0.5s ease forwards;
+    }
 
-		.legend li {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 0.7rem;
-			color: var(--muted);
-		}
+    .axis {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+      font-size: 0.72rem;
+      color: #768da3;
+      font-family: "JetBrains Mono", monospace;
+    }
 
-		.legend span:first-child {
-			display: inline-flex;
-			align-items: center;
-			gap: 0.4rem;
-			color: var(--text);
-		}
+    .rings {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.95rem;
+      align-items: center;
+    }
 
-		.dot {
-			width: 8px;
-			height: 8px;
-			border-radius: 50%;
-			background: var(--accent);
-			box-shadow: 0 0 8px #39a4ff88;
-		}
+    .donut {
+      width: 152px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(
+        #26a8ff 0 14%,
+        #54bfff 14% 27%,
+        #85d3ff 27% 39%,
+        #00c090 39% 50%,
+        #f4b13f 50% 60%,
+        #e8eff7 60% 100%
+      );
+      position: relative;
+    }
 
-		main {
-			padding-bottom: 1.4rem;
-		}
+    .donut::after {
+      content: "";
+      position: absolute;
+      inset: 24px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid #dce7f2;
+    }
 
-		@keyframes rise {
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
+    .legend {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.46rem;
+      font-size: 0.82rem;
+    }
 
-		@media (max-width: 980px) {
-			.kpis {
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-			}
+    .legend li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+    }
 
-			.grid {
-				grid-template-columns: 1fr;
-			}
+    .left {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+    }
 
-		}
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
 
-		@media (max-width: 620px) {
-			.menu {
-				display: none;
-			}
+    .mini-footer {
+      margin-top: 0.9rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
 
-			.search {
-				grid-template-columns: 1fr;
-			}
+    .mini-bottom {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.68rem;
+      box-shadow: var(--shadow-card);
+    }
 
-			.donut-wrap {
-				grid-template-columns: 1fr;
-			}
-		}
-	</style>
+    .mini-bottom .k {
+      color: var(--muted);
+      font-size: 0.73rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .mini-bottom .v {
+      margin-top: 0.2rem;
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1050px) {
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-buttons {
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .search {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .rings {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-footer {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-	<header>
-		<div class="container nav">
-			<a class="brand" href="#">
-				<span class="brand-dot"></span>
-				<span>Tonviewer</span>
-			</a>
-			<nav class="menu">
-				<a href="#">Explorer</a>
-				<a href="#">Price</a>
-				<a href="#">Stats</a>
-				<a href="#">Transactions</a>
-			</nav>
-		</div>
-	</header>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#">
+        <span class="logo"></span>
+        <span>Elysiumviewer</span>
+      </a>
+      <nav class="nav-links">
+        <a class="active" href="#">Explorer</a>
+        <a href="#">Price</a>
+        <a href="#">Stats</a>
+        <a href="#">Transactions</a>
+        <a href="#">Addresses</a>
+        <a href="#">Tools</a>
+      </nav>
+    </div>
+  </header>
 
-	<main class="container">
-		<section class="hero">
-			<div class="search">
-				<input type="text" placeholder="Search by address, transaction hash, block, NFT, domain..." />
-				<button type="button">Search</button>
-			</div>
+  <main class="container">
+    <section class="toolbar">
+      <div class="search">
+        <input type="text" placeholder="Search by address / tx hash / block / NFT / domain" />
+        <button type="button">Search</button>
+      </div>
+      <div class="quick-buttons">
+        <button type="button">Last Block</button>
+        <button type="button">Last Tx</button>
+        <button type="button">Config</button>
+        <button type="button">Radar</button>
+      </div>
+    </section>
 
-			<div class="kpis">
-				<article class="pill">
-					<div class="label">Toncoin Price</div>
-					<div class="value">$1.34</div>
-				</article>
-				<article class="pill">
-					<div class="label">Market Cap</div>
-					<div class="value">$3.41B</div>
-				</article>
-				<article class="pill">
-					<div class="label">Current TPS</div>
-					<div class="value">33.52</div>
-				</article>
-				<article class="pill">
-					<div class="label">Processed / hour</div>
-					<div class="value">110,371</div>
-				</article>
-			</div>
-		</section>
+    <section class="stats">
+      <article class="mini-tile">
+        <div class="name">Toncoin Price</div>
+        <div class="val">$1.34</div>
+      </article>
+      <article class="mini-tile">
+        <div class="name">Market Cap</div>
+        <div class="val">$3.41B</div>
+      </article>
+      <article class="mini-tile">
+        <div class="name">Current TPS</div>
+        <div class="val">33.52</div>
+      </article>
+      <article class="mini-tile">
+        <div class="name">Processed / Hour</div>
+        <div class="val">110,371</div>
+      </article>
+    </section>
 
-		<section class="grid">
-			<article class="card">
-				<h2>Transactions Chart</h2>
-				<p class="sub">Hourly network activity</p>
-				<div class="bars" id="bars"></div>
-				<div class="chart-footer">
-					<span>00:00</span>
-					<span>12:00</span>
-					<span>24:00</span>
-				</div>
-			</article>
+    <section class="layout">
+      <article class="panel">
+        <h2>Transactions Chart</h2>
+        <p class="sub">Network activity over the last 24 hours</p>
+        <div class="bars" id="bars"></div>
+        <div class="axis">
+          <span>00:00</span>
+          <span>12:00</span>
+          <span>24:00</span>
+        </div>
+      </article>
 
-			<article class="card">
-				<h2>Accounts Types</h2>
-				<p class="sub">Distribution by active contract type</p>
-				<div class="donut-wrap">
-					<div class="donut" aria-hidden="true"></div>
-					<ul class="legend">
-						<li><span><i class="dot" style="background:#3aa9ff"></i>wallet_v4r2</span><span>13%</span></li>
-						<li><span><i class="dot" style="background:#66c1ff"></i>jetton_wallet_v2</span><span>12%</span></li>
-						<li><span><i class="dot" style="background:#8fd6ff"></i>nft_item</span><span>11%</span></li>
-						<li><span><i class="dot" style="background:#2fd08f"></i>jetton_wallet</span><span>8%</span></li>
-						<li><span><i class="dot" style="background:#ffb357"></i>other</span><span>40%</span></li>
-					</ul>
-				</div>
-			</article>
-		</section>
-	</main>
+      <article class="panel">
+        <h2>Accounts Types</h2>
+        <p class="sub">Distribution of account contracts</p>
+        <div class="rings">
+          <div class="donut" aria-hidden="true"></div>
+          <ul class="legend">
+            <li><span class="left"><i class="dot" style="background:#26a8ff"></i>wallet_v4r2</span><strong>13%</strong></li>
+            <li><span class="left"><i class="dot" style="background:#54bfff"></i>jetton_wallet_v2</span><strong>12%</strong></li>
+            <li><span class="left"><i class="dot" style="background:#85d3ff"></i>nft_item</span><strong>11%</strong></li>
+            <li><span class="left"><i class="dot" style="background:#00c090"></i>jetton_wallet</span><strong>8%</strong></li>
+            <li><span class="left"><i class="dot" style="background:#f4b13f"></i>other</span><strong>40%</strong></li>
+          </ul>
+        </div>
+      </article>
+    </section>
 
-	<script>
-		const barsRoot = document.getElementById("bars");
-		const data = [
-			28, 31, 26, 22, 35, 40, 44, 38, 52, 49, 61, 58,
-			66, 70, 64, 60, 57, 62, 55, 48, 53, 65, 72, 68,
-			74, 69, 58, 47, 43, 50, 56, 59, 67, 73, 71, 63,
-			54, 46, 42, 39, 45, 51, 57, 62, 66, 60, 55, 49
-		];
+    <section class="mini-footer">
+      <article class="mini-bottom">
+        <div class="k">Accounts Types</div>
+        <div class="v">undetected 14%</div>
+      </article>
+      <article class="mini-bottom">
+        <div class="k">Transactions Types</div>
+        <div class="v">TextComment 29%</div>
+      </article>
+      <article class="mini-bottom">
+        <div class="k">Status</div>
+        <div class="v">Mainnet Online</div>
+      </article>
+    </section>
+  </main>
 
-		data.forEach((point, idx) => {
-			const bar = document.createElement("div");
-			bar.className = "bar";
-			bar.style.height = `${point * 2}px`;
-			bar.style.animationDelay = `${idx * 0.012}s`;
-			barsRoot.appendChild(bar);
-		});
-	</script>
+  <script>
+    const barsRoot = document.getElementById("bars");
+    const points = [
+      28, 31, 24, 26, 35, 41, 46, 37, 54, 49, 59, 63, 68, 71,
+      62, 57, 64, 69, 52, 45, 49, 55, 61, 65, 72, 69, 58, 47,
+      42, 50, 56, 60, 67, 73, 70, 62, 53, 46, 40, 43, 48, 52,
+      57, 63, 66, 60, 54, 49, 46, 44, 50, 57, 61, 64, 59, 52
+    ];
+
+    points.forEach((point, idx) => {
+      const bar = document.createElement("div");
+      bar.className = "bar";
+      bar.style.height = `${point * 2.2}px`;
+      bar.style.animationDelay = `${idx * 0.01}s`;
+      barsRoot.appendChild(bar);
+    });
+  </script>
 </body>
 </html>
