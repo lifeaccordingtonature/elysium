@@ -74,7 +74,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      transform: translateY(-7vh);
+      transform: translateY(-6vh);
     }
 
     .title {
@@ -87,7 +87,7 @@
 
     .search {
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 0.55rem;
       padding: 0;
       background: none;
@@ -97,6 +97,7 @@
 
     .search input {
       width: 100%;
+      min-width: 0;
       border: 1px solid #dfe9f3;
       background: linear-gradient(180deg, #ffffff 0%, #f3f8fd 100%);
       border-radius: 999px;
@@ -144,11 +145,16 @@
 
     @media (max-width: 680px) {
       main {
-        transform: translateY(-4vh);
+        transform: translateY(-3vh);
       }
 
       .search {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0.4rem;
+      }
+
+      .search input {
+        min-width: 0;
       }
     }
   </style>
@@ -161,7 +167,7 @@
   <main class="container">
     <h1 class="title">Elysiumviewer</h1>
     <div class="search">
-      <input type="text" placeholder="Search by address,name or transaction" />
+      <input type="text" placeholder="Search by address, name or transaction" />
       <button type="button">Search</button>
     </div>
     
