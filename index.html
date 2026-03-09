@@ -73,7 +73,7 @@
       font-size: 0.82rem;
       font-weight: 800;
       letter-spacing: 0.04em;
-      color: #3a5875;
+      color: #04070b;
       background:
         linear-gradient(180deg, #ffffff 0%, #f3f8fd 100%);
       cursor: pointer;
@@ -233,6 +233,10 @@
       opacity: 0.96;
     }
 
+    .search-input-wrapper:has(.search-btn.active) input {
+      border-radius: 999px;
+    }
+
     .search-input-wrapper.is-morphing::after {
       opacity: 1;
       transform: translateY(-50%) scaleX(1);
@@ -255,7 +259,7 @@
       align-items: center;
       justify-content: center;
       font-size: 1.2rem;
-      color: #3a5875;
+      color: #04070b;
       font-weight: 800;
       transition: right 0.65s cubic-bezier(0.4, 0, 0.2, 1), 
                   opacity 0.4s ease 0.2s,
@@ -372,7 +376,7 @@
       font-size: 1.05rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: #3a5875;
+      color: #04070b;
       background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 248, 253, 0.9) 100%);
       backdrop-filter: blur(12px) saturate(180%);
