@@ -40,9 +40,10 @@
     }
 
     .top {
-      display: flex;
-      justify-content: flex-end;
-      padding-top: 1rem;
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 100;
     }
 
     .wallet-btn {
@@ -80,39 +81,38 @@
       letter-spacing: 0.01em;
     }
 
-    .subtitle {
-      margin: 0 0 1rem;
-      text-align: center;
-      font-size: 0.92rem;
-      color: var(--muted);
-    }
-
     .search {
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 0.55rem;
-      padding: 0.5rem;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      box-shadow: var(--shadow-soft);
+      padding: 0;
+      background: none;
+      border: 0;
+      box-shadow: none;
     }
 
     .search input {
       width: 100%;
-      border: 1px solid #e3ebf3;
-      background: #f8fbff;
-      border-radius: 11px;
+      border: 1px solid #dfe9f3;
+      background: linear-gradient(180deg, #ffffff 0%, #f3f8fd 100%);
+      border-radius: 999px;
       padding: 0.82rem 0.92rem;
       font-family: inherit;
       font-size: 0.94rem;
       color: var(--text);
       outline: none;
+      box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 10px 24px -18px rgba(24, 55, 88, 0.45),
+        0 1px 2px rgba(255, 255, 255, 0.9);
     }
 
     .search input:focus {
-      border-color: #9ecfff;
-      box-shadow: 0 0 0 3px #d8ecff;
+      border-color: #cfe0f0;
+      box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 10px 24px -18px rgba(24, 55, 88, 0.45),
+        0 0 0 3px #e9f3fb;
     }
 
     .search button {
@@ -150,15 +150,14 @@
   </style>
 </head>
 <body>
-  <div class="container top">
+  <div class="top">
     <button type="button" class="wallet-btn">Connect wallet</button>
   </div>
 
   <main class="container">
     <h1 class="title">Elysiumviewer</h1>
-    <p class="subtitle">Search by address / tx hash / block / NFT / domain</p>
     <div class="search">
-      <input type="text" placeholder="Start typing to search..." />
+      <input type="text" placeholder="Search by address,name or transaction" />
       <button type="button">Search</button>
     </div>
     
