@@ -96,8 +96,30 @@
       gap: 0.7rem;
     }
 
+    .search-input-wrapper::after {
+      content: "";
+      position: absolute;
+      right: 4.1rem;
+      top: 50%;
+      width: 2.4rem;
+      height: 2.2rem;
+      transform: translateY(-50%) scaleX(0.2);
+      transform-origin: right center;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 247, 255, 0.9) 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        0 8px 18px -14px rgba(24, 55, 88, 0.45);
+      opacity: 0;
+      filter: blur(0.2px);
+      transition: opacity 0.28s ease, transform 0.45s cubic-bezier(0.2, 0.75, 0.2, 1);
+      pointer-events: none;
+      z-index: 1;
+    }
+
     .search-input-wrapper input {
       flex: 1;
+      min-height: 3.4rem;
       border: 1px solid #dfe9f3;
       background: linear-gradient(180deg, #ffffff 0%, #f3f8fd 100%);
       border-radius: 999px;
@@ -119,7 +141,18 @@
         inset 0 1px 0 #ffffff,
         0 10px 24px -18px rgba(24, 55, 88, 0.45),
         0 0 0 3px #e9f3fb;
+    }
+
+    .search-input-wrapper.has-text input {
       flex: 0.75;
+      padding-right: 1.2rem;
+      border-top-right-radius: 1.2rem;
+      border-bottom-right-radius: 1.2rem;
+    }
+
+    .search-input-wrapper.has-text::after {
+      opacity: 1;
+      transform: translateY(-50%) scaleX(1);
     }
 
     .action-btn {
@@ -143,6 +176,12 @@
       z-index: 10;
     }
 
+    .search-input-wrapper.has-text .action-btn {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-50%) scale(0.8);
+    }
+
     .action-btn:hover {
       background: rgba(26, 159, 255, 0.1);
     }
@@ -151,7 +190,7 @@
       border: 1px solid #dfe9f3;
       border-radius: 999px;
       padding: 0 1.8rem;
-      height: 3rem;
+      height: 3.4rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -177,10 +216,26 @@
     .search-btn.active {
       opacity: 1;
       transform: scale(1);
+      animation: liquidPop 0.45s cubic-bezier(0.2, 0.75, 0.2, 1);
     }
 
     .search-btn:hover {
       background: linear-gradient(180deg, #ffffff 0%, #eef5fb 100%);
+    }
+
+    @keyframes liquidPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.72);
+      }
+      55% {
+        opacity: 1;
+        transform: scale(1.06);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     .search-icon {
@@ -202,9 +257,16 @@
       .search-input-wrapper input {
         padding: 1.1rem 4.5rem 1.1rem 3.5rem;
         font-size: 0.95rem;
+        min-height: 3rem;
       }
 
-      .search-input-wrapper input:focus {
+      .search-input-wrapper::after {
+        right: 3.4rem;
+        width: 2rem;
+        height: 1.85rem;
+      }
+
+      .search-input-wrapper.has-text input {
         flex: 0.7;
       }
 
@@ -245,6 +307,7 @@
     const input = document.getElementById('searchInput');
     const actionBtn = document.getElementById('actionBtn');
     const searchBtn = document.getElementById('searchBtn');
+    const wrapper = input.closest('.search-input-wrapper');
     let isActive = false;
 
     actionBtn.addEventListener('click', async () => {
@@ -265,14 +328,27 @@
 
     input.addEventListener('input', () => {
       if (input.value.length > 0) {
+        wrapper.classList.add('has-text');
         searchBtn.classList.add('active');
       } else {
+        wrapper.classList.remove('has-text');
         searchBtn.classList.remove('active');
       }
     });
 
-    input.addEventListener('keydown', (e) => {
-      if (e.key === '/') {
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) {
+        return;
+      }
+
+      const target = e.target;
+      const isTypingTarget = target && (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable
+      );
+
+      if (!isTypingTarget) {
         e.preventDefault();
         isActive = true;
         updateActionBtn();
