@@ -144,11 +144,10 @@
     .search-input-wrapper.has-text input {
       width: calc(100% - 8.8rem);
       padding-right: 1.2rem;
-      border-top-right-radius: 1.2rem;
-      border-bottom-right-radius: 1.2rem;
+      border-radius: 999px;
     }
 
-    .search-input-wrapper.has-text::after {
+    .search-input-wrapper.is-morphing::after {
       opacity: 1;
       transform: translateY(-50%) scaleX(1);
     }
@@ -314,6 +313,7 @@
     const searchBtn = document.getElementById('searchBtn');
     const wrapper = input.closest('.search-input-wrapper');
     let isActive = false;
+    let morphTimer = null;
 
     actionBtn.addEventListener('click', async () => {
       if (!isActive) {
@@ -333,12 +333,27 @@
 
     input.addEventListener('input', () => {
       if (input.value.length > 0) {
+        const wasHidden = !wrapper.classList.contains('has-text');
         wrapper.classList.add('has-text');
         searchBtn.classList.add('active');
+
+        if (wasHidden) {
+          wrapper.classList.add('is-morphing');
+          clearTimeout(morphTimer);
+          morphTimer = setTimeout(() => {
+            wrapper.classList.remove('is-morphing');
+          }, 520);
+        }
       } else {
         wrapper.classList.remove('has-text');
+        wrapper.classList.remove('is-morphing');
         searchBtn.classList.remove('active');
       }
+    });
+
+    input.addEventListener('focus', () => {
+      isActive = true;
+      updateActionBtn();
     });
 
     document.addEventListener('keydown', (e) => {
