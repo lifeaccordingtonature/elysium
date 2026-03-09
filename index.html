@@ -92,6 +92,18 @@
       background: none;
       border: 0;
       box-shadow: none;
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.3rem;
+      height: 1.3rem;
+      pointer-events: none;
+      opacity: 0.6;
     }
 
     .search input {
@@ -100,7 +112,7 @@
       border: 1px solid #dfe9f3;
       background: linear-gradient(180deg, #ffffff 0%, #f3f8fd 100%);
       border-radius: 999px;
-      padding: 1.3rem 1.5rem;
+      padding: 1.3rem 1.5rem 1.3rem 3.5rem;
       font-family: inherit;
       font-size: 1.2rem;
       color: var(--text);
@@ -142,9 +154,35 @@
       background: linear-gradient(180deg, #ffffff 0%, #eef5fb 100%);
     }
 
+    .search-icon {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.3rem;
+      height: 1.3rem;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .search {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.7rem;
+      padding: 0;
+      background: none;
+      border: 0;
+      box-shadow: none;
+      position: relative;
+    }
+
+    .search input {
+      padding-left: 3.5rem;
+    }
+
     @media (max-width: 680px) {
       main {
-        transform: translateY(-7vh);
+        transform: translateY(-18vh);
       }
 
       .search {
@@ -154,13 +192,13 @@
 
       .search input {
         min-width: 0;
-        padding: 0.9rem 0.95rem;
-        font-size: 0.95rem;
+        padding: 1.1rem 1.2rem 1.1rem 3.5rem;
+        font-size: 1.05rem;
       }
 
       .search button {
-        padding: 0 1rem;
-        font-size: 0.82rem;
+        padding: 0 1.3rem;
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -173,6 +211,10 @@
   <main class="container">
     <h1 class="title">Elysiumviewer</h1>
     <div class="search">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
       <input type="text" placeholder="Search by address, name or transaction" />
       <button type="button">Search</button>
     </div>
