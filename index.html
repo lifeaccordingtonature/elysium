@@ -46,8 +46,12 @@
       height: 70vh;
       pointer-events: none;
       background:
-        radial-gradient(48% 42% at 18% 28%, rgba(214, 236, 255, 0.3) 0%, rgba(214, 236, 255, 0) 72%),
-        radial-gradient(48% 42% at 82% 22%, rgba(196, 226, 255, 0.3) 0%, rgba(196, 226, 255, 0) 74%);
+        radial-gradient(48% 42% at 18% 28%, rgba(214, 236, 255, 0.35) 0%, rgba(214, 236, 255, 0) 72%),
+        radial-gradient(38% 35% at 8% 12%, rgba(183, 220, 255, 0.28) 0%, rgba(183, 220, 255, 0) 68%),
+        radial-gradient(42% 38% at 28% 18%, rgba(196, 230, 255, 0.22) 0%, rgba(196, 230, 255, 0) 70%),
+        radial-gradient(48% 42% at 82% 22%, rgba(196, 226, 255, 0.35) 0%, rgba(196, 226, 255, 0) 74%),
+        radial-gradient(36% 34% at 92% 15%, rgba(170, 214, 252, 0.26) 0%, rgba(170, 214, 252, 0) 66%),
+        radial-gradient(40% 36% at 76% 8%, rgba(188, 222, 255, 0.24) 0%, rgba(188, 222, 255, 0) 68%);
       filter: blur(20px);
       animation: edgeDrift 18s ease-in-out infinite alternate;
       z-index: -1;
@@ -605,9 +609,17 @@
         transform: translate3d(0, 0, 0) scale(1);
         opacity: 0.95;
       }
-      100% {
-        transform: translate3d(0, 1.6%, 0) scale(1.03);
+      33% {
+        transform: translate3d(1.5%, 1.2%, 0) scale(1.04);
         opacity: 1;
+      }
+      66% {
+        transform: translate3d(-1.2%, 2%, 0) scale(1.02);
+        opacity: 0.98;
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.95;
       }
     }
 
