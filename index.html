@@ -28,65 +28,32 @@
       font-family: "Manrope", sans-serif;
       color: var(--text);
       background: 
-        radial-gradient(circle at 15% 30%, rgba(77, 184, 255, 0.15) 0%, transparent 35%),
-        radial-gradient(circle at 65% 75%, rgba(26, 159, 255, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 85% 20%, rgba(77, 184, 255, 0.1) 0%, transparent 30%),
-        radial-gradient(circle at 25% 80%, rgba(26, 159, 255, 0.1) 0%, transparent 38%),
-        radial-gradient(circle at 75% 40%, rgba(77, 184, 255, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 40% 60%, rgba(26, 159, 255, 0.11) 0%, transparent 42%),
+        radial-gradient(ellipse 900px 500px at 20% 40%, rgba(77, 184, 255, 0.25) 0%, rgba(26, 159, 255, 0.1) 35%, transparent 60%),
+        radial-gradient(ellipse 600px 900px at 75% 60%, rgba(26, 159, 255, 0.22) 0%, rgba(26, 159, 255, 0.08) 30%, transparent 55%),
+        radial-gradient(ellipse 500px 700px at 50% 80%, rgba(77, 184, 255, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 30% 20%, rgba(26, 159, 255, 0.3) 0%, transparent 25%),
         #ffffff;
-      background-size: 
-        500px 600px,
-        700px 800px,
-        450px 550px,
-        600px 700px,
-        800px 600px,
-        650px 750px,
-        100% 100%;
-      animation: 
-        float1 15s ease-in-out infinite,
-        float2 18s ease-in-out infinite,
-        float3 20s ease-in-out infinite,
-        float4 22s ease-in-out infinite,
-        float5 17s ease-in-out infinite,
-        float6 19s ease-in-out infinite;
+      background-attachment: fixed;
+      animation: floatAround 25s ease-in-out infinite;
       min-height: 100vh;
     }
 
-    @keyframes float1 {
-      0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-      50% { background-position: 50px -30px, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-      100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-    }
-
-    @keyframes float2 {
-      0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-      50% { background-position: 0% 0%, -40px 50px, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-      100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-    }
-
-    @keyframes float3 {
-      0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-      50% { background-position: 0% 0%, 0% 0%, 30px 40px, 0% 0%, 0% 0%, 0% 0%; }
-      100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-    }
-
-    @keyframes float4 {
-      0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-      50% { background-position: 0% 0%, 0% 0%, 0% 0%, -50px -30px, 0% 0%, 0% 0%; }
-      100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-    }
-
-    @keyframes float5 {
-      0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-      50% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 60px 50px, 0% 0%; }
-      100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-    }
-
-    @keyframes float6 {
-      0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-      50% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, -45px 35px; }
-      100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+    @keyframes floatAround {
+      0% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+      }
+      25% { 
+        background-position: 60px -40px, -50px 60px, 40px 50px, 30px 20px;
+      }
+      50% { 
+        background-position: -40px 80px, 70px -30px, -60px 40px, -35px 35px;
+      }
+      75% { 
+        background-position: 80px 30px, -60px -70px, 50px -50px, 45px -25px;
+      }
+      100% { 
+        background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+      }
     }
 
     .container {
