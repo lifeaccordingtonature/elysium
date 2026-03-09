@@ -46,13 +46,15 @@
       height: 70vh;
       pointer-events: none;
       background:
-        radial-gradient(48% 42% at 18% 28%, rgba(214, 236, 255, 0.35) 0%, rgba(214, 236, 255, 0) 72%),
-        radial-gradient(38% 35% at 8% 12%, rgba(183, 220, 255, 0.28) 0%, rgba(183, 220, 255, 0) 68%),
-        radial-gradient(42% 38% at 28% 18%, rgba(196, 230, 255, 0.22) 0%, rgba(196, 230, 255, 0) 70%),
-        radial-gradient(48% 42% at 82% 22%, rgba(196, 226, 255, 0.35) 0%, rgba(196, 226, 255, 0) 74%),
-        radial-gradient(36% 34% at 92% 15%, rgba(170, 214, 252, 0.26) 0%, rgba(170, 214, 252, 0) 66%),
-        radial-gradient(40% 36% at 76% 8%, rgba(188, 222, 255, 0.24) 0%, rgba(188, 222, 255, 0) 68%);
-      filter: blur(20px);
+        radial-gradient(18% 16% at 18% 28%, rgba(214, 236, 255, 0.42) 0%, rgba(214, 236, 255, 0) 72%),
+        radial-gradient(14% 13% at 8% 12%, rgba(183, 220, 255, 0.36) 0%, rgba(183, 220, 255, 0) 68%),
+        radial-gradient(16% 14% at 28% 18%, rgba(196, 230, 255, 0.28) 0%, rgba(196, 230, 255, 0) 70%),
+        radial-gradient(15% 14% at 42% 8%, rgba(170, 210, 245, 0.32) 0%, rgba(170, 210, 245, 0) 68%),
+        radial-gradient(18% 16% at 82% 22%, rgba(196, 226, 255, 0.42) 0%, rgba(196, 226, 255, 0) 74%),
+        radial-gradient(14% 13% at 92% 15%, rgba(170, 214, 252, 0.34) 0%, rgba(170, 214, 252, 0) 66%),
+        radial-gradient(16% 15% at 76% 8%, rgba(188, 222, 255, 0.3) 0%, rgba(188, 222, 255, 0) 68%),
+        radial-gradient(13% 12% at 58% 14%, rgba(200, 228, 255, 0.26) 0%, rgba(200, 228, 255, 0) 66%);
+      filter: blur(12px);
       animation: edgeDrift 18s ease-in-out infinite alternate;
       z-index: -1;
     }
@@ -64,13 +66,15 @@
       height: 70vh;
       pointer-events: none;
       background:
-        radial-gradient(50% 44% at 15% 72%, rgba(210, 233, 255, 0.32) 0%, rgba(210, 233, 255, 0) 74%),
-        radial-gradient(40% 36% at 6% 88%, rgba(183, 220, 255, 0.26) 0%, rgba(183, 220, 255, 0) 66%),
-        radial-gradient(44% 40% at 25% 82%, rgba(196, 228, 255, 0.24) 0%, rgba(196, 228, 255, 0) 70%),
-        radial-gradient(50% 44% at 85% 75%, rgba(188, 224, 255, 0.34) 0%, rgba(188, 224, 255, 0) 76%),
-        radial-gradient(38% 36% at 94% 85%, rgba(170, 214, 252, 0.28) 0%, rgba(170, 214, 252, 0) 68%),
-        radial-gradient(42% 38% at 75% 92%, rgba(196, 226, 255, 0.25) 0%, rgba(196, 226, 255, 0) 70%);
-      filter: blur(20px);
+        radial-gradient(18% 17% at 15% 72%, rgba(210, 233, 255, 0.4) 0%, rgba(210, 233, 255, 0) 74%),
+        radial-gradient(15% 14% at 6% 88%, rgba(183, 220, 255, 0.34) 0%, rgba(183, 220, 255, 0) 66%),
+        radial-gradient(17% 15% at 25% 82%, rgba(196, 228, 255, 0.3) 0%, rgba(196, 228, 255, 0) 70%),
+        radial-gradient(14% 13% at 38% 92%, rgba(180, 218, 248, 0.28) 0%, rgba(180, 218, 248, 0) 68%),
+        radial-gradient(18% 17% at 85% 75%, rgba(188, 224, 255, 0.42) 0%, rgba(188, 224, 255, 0) 76%),
+        radial-gradient(15% 14% at 94% 85%, rgba(170, 214, 252, 0.36) 0%, rgba(170, 214, 252, 0) 68%),
+        radial-gradient(16% 15% at 75% 92%, rgba(196, 226, 255, 0.32) 0%, rgba(196, 226, 255, 0) 70%),
+        radial-gradient(13% 12% at 62% 86%, rgba(188, 220, 248, 0.28) 0%, rgba(188, 220, 248, 0) 66%);
+      filter: blur(12px);
       animation: edgeDriftBottom 20s ease-in-out infinite alternate;
       z-index: -1;
     }
@@ -712,6 +716,28 @@
     }
 
     @media (max-width: 680px) {
+      body::before {
+        background:
+          radial-gradient(24% 22% at 18% 28%, rgba(214, 236, 255, 0.42) 0%, rgba(214, 236, 255, 0) 72%),
+          radial-gradient(20% 18% at 8% 12%, rgba(183, 220, 255, 0.36) 0%, rgba(183, 220, 255, 0) 68%),
+          radial-gradient(22% 20% at 28% 18%, rgba(196, 230, 255, 0.28) 0%, rgba(196, 230, 255, 0) 70%),
+          radial-gradient(24% 22% at 82% 22%, rgba(196, 226, 255, 0.42) 0%, rgba(196, 226, 255, 0) 74%),
+          radial-gradient(20% 19% at 92% 15%, rgba(170, 214, 252, 0.34) 0%, rgba(170, 214, 252, 0) 66%),
+          radial-gradient(22% 20% at 76% 8%, rgba(188, 222, 255, 0.3) 0%, rgba(188, 222, 255, 0) 68%);
+        filter: blur(10px);
+      }
+
+      body::after {
+        background:
+          radial-gradient(24% 23% at 15% 72%, rgba(210, 233, 255, 0.4) 0%, rgba(210, 233, 255, 0) 74%),
+          radial-gradient(21% 19% at 6% 88%, rgba(183, 220, 255, 0.34) 0%, rgba(183, 220, 255, 0) 66%),
+          radial-gradient(23% 21% at 25% 82%, rgba(196, 228, 255, 0.3) 0%, rgba(196, 228, 255, 0) 70%),
+          radial-gradient(24% 23% at 85% 75%, rgba(188, 224, 255, 0.42) 0%, rgba(188, 224, 255, 0) 76%),
+          radial-gradient(21% 20% at 94% 85%, rgba(170, 214, 252, 0.36) 0%, rgba(170, 214, 252, 0) 68%),
+          radial-gradient(22% 21% at 75% 92%, rgba(196, 226, 255, 0.32) 0%, rgba(196, 226, 255, 0) 70%);
+        filter: blur(10px);
+      }
+
       main {
         transform: translateY(-18vh);
       }
