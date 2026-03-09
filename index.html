@@ -329,6 +329,7 @@
       transition: opacity 0.38s ease, transform 0.48s cubic-bezier(0.22, 1, 0.36, 1), filter 0.38s ease;
       pointer-events: none;
       z-index: 1;
+      color: rgba(20, 34, 53, 0.6);
     }
 
     .action-btn .action-btn-slash {
@@ -764,6 +765,7 @@
     let morphTimer = null;
     let searchRevealTimer = null;
     const INPUT_COLLAPSE_DELAY = 460;
+    const SEARCH_REVEAL_DELAY = 150;
 
     actionBtn.addEventListener('mousedown', (e) => {
       // Keep input focus while clicking the action button to avoid blur-reset race.
@@ -800,7 +802,7 @@
             if (input.value.length > 0) {
               searchBtn.classList.add('active');
             }
-          }, INPUT_COLLAPSE_DELAY);
+          }, SEARCH_REVEAL_DELAY);
 
           clearTimeout(morphTimer);
           morphTimer = setTimeout(() => {
@@ -811,7 +813,7 @@
             if (input.value.length > 0) {
               searchBtn.classList.add('active');
             }
-          }, INPUT_COLLAPSE_DELAY);
+          }, SEARCH_REVEAL_DELAY);
         }
       } else {
         clearTimeout(searchRevealTimer);
