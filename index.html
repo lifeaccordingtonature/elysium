@@ -208,12 +208,22 @@
       pointer-events: none;
       opacity: 0.6;
       z-index: 2;
-      transform-origin: right center;
       transition: all var(--input-collapse-ms) cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .search-input-wrapper.has-text .search-icon {
+      transform: translateY(-50%) translateX(0.2rem);
     }
 
     .search-input-wrapper.has-text input,
     .search-input-wrapper.has-text .search-icon {
+    }
+
+    .search-input-wrapper.has-text .search-icon {
+      transform: translateY(-50%) translateX(0.2rem) scale(0.996);
+    }
+
+    .search-input-wrapper.has-text input {
       transform: scaleX(0.992) scaleY(0.996);
     }
 
@@ -238,6 +248,13 @@
 
     .search-input-wrapper.has-text.is-morphing input,
     .search-input-wrapper.has-text.is-morphing .search-icon {
+    }
+
+    .search-input-wrapper.has-text.is-morphing .search-icon {
+      transform: translateY(-50%) translateX(0.4rem) scale(0.984);
+    }
+
+    .search-input-wrapper.has-text.is-morphing input {
       transform: scaleX(0.972) scaleY(0.984);
     }
 
@@ -672,6 +689,13 @@
 
       .search-input-wrapper.has-text input,
       .search-input-wrapper.has-text .search-icon {
+      }
+
+      .search-input-wrapper.has-text .search-icon {
+        transform: translateY(-50%) translateX(0.2rem) scale(0.996);
+      }
+
+      .search-input-wrapper.has-text input {
         transform: scaleX(0.992) scaleY(0.996);
       }
 
@@ -696,6 +720,13 @@
 
       .search-input-wrapper.has-text.is-morphing input,
       .search-input-wrapper.has-text.is-morphing .search-icon {
+      }
+
+      .search-input-wrapper.has-text.is-morphing .search-icon {
+        transform: translateY(-50%) translateX(0.4rem) scale(0.984);
+      }
+
+      .search-input-wrapper.has-text.is-morphing input {
         transform: scaleX(0.972) scaleY(0.984);
       }
 
