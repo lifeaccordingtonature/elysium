@@ -166,9 +166,11 @@
       transform: translateY(-50%);
       width: 3rem;
       height: 3rem;
-      border: none;
+      border: 1px solid rgba(223, 233, 243, 0.62);
       border-radius: 50%;
-      background: transparent;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(241, 247, 252, 0.72) 100%);
+      backdrop-filter: blur(10px) saturate(170%);
+      -webkit-backdrop-filter: blur(10px) saturate(170%);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -180,6 +182,13 @@
                   opacity 0.4s ease 0.2s,
                   transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 10;
+      overflow: hidden;
+      isolation: isolate;
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.95),
+        inset 0 -1px 1px rgba(220, 232, 245, 0.45),
+        0 6px 14px -8px rgba(21, 52, 83, 0.45),
+        0 2px 6px -2px rgba(58, 88, 117, 0.2);
     }
 
     .search-input-wrapper.has-text .action-btn {
@@ -190,7 +199,81 @@
     }
 
     .action-btn:hover {
-      background: rgba(26, 159, 255, 0.1);
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 1),
+        inset 0 -1px 1px rgba(220, 232, 245, 0.5),
+        0 8px 16px -8px rgba(21, 52, 83, 0.5),
+        0 3px 8px -2px rgba(58, 88, 117, 0.24);
+    }
+
+    .action-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.56) 0%, rgba(255, 255, 255, 0.08) 55%, rgba(224, 236, 247, 0.25) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .action-btn::after {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      top: -52%;
+      left: -48%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0) 58%);
+      opacity: 0.58;
+      transform: translate3d(0, 0, 0) scale(1);
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.55s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .action-btn:hover::after {
+      transform: translate3d(4%, 4%, 0) scale(1.08);
+      opacity: 0.78;
+    }
+
+    .action-btn .action-btn-slash,
+    .action-btn .action-btn-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: center;
+      transition: opacity 0.38s ease, transform 0.48s cubic-bezier(0.22, 1, 0.36, 1), filter 0.38s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .action-btn .action-btn-slash {
+      line-height: 1;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+      filter: blur(0);
+    }
+
+    .action-btn .action-btn-icon {
+      width: 1.05em;
+      height: 1.05em;
+      line-height: 1;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.65) rotate(12deg);
+      filter: blur(0.35px);
+    }
+
+    .action-btn.is-paste .action-btn-slash {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.65) rotate(-10deg);
+      filter: blur(0.35px);
+    }
+
+    .action-btn.is-paste .action-btn-icon {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+      filter: blur(0);
     }
 
     .search-btn {
@@ -198,10 +281,9 @@
       right: 0;
       top: 50%;
       transform: translateY(-50%) translateX(calc(-1 * var(--search-start-shift))) scale(0.65);
-      border: 1px solid #dfe9f3;
+      border: 1px solid rgba(223, 233, 243, 0.6);
       border-radius: 999px;
-      padding: 0 1.8rem;
-      height: 3.4rem;
+      padding: 1.3rem 1.8rem;
       width: var(--search-width);
       display: flex;
       align-items: center;
@@ -213,11 +295,15 @@
       text-transform: uppercase;
       color: #3a5875;
       background:
-        linear-gradient(180deg, #ffffff 0%, #f3f8fd 100%);
+        linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 248, 253, 0.9) 100%);
+      backdrop-filter: blur(12px) saturate(180%);
+      -webkit-backdrop-filter: blur(12px) saturate(180%);
       cursor: pointer;
       box-shadow:
-        inset 0 1px 0 #ffffff,
+        inset 0 1px 1px rgba(255, 255, 255, 0.9),
+        inset 0 -1px 1px rgba(223, 233, 243, 0.3),
         0 10px 24px -18px rgba(24, 55, 88, 0.45),
+        0 4px 12px -4px rgba(58, 88, 117, 0.15),
         0 1px 2px rgba(255, 255, 255, 0.9);
       transition: all 0.65s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0;
@@ -228,6 +314,39 @@
       will-change: transform, width, opacity;
     }
 
+    .search-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.5) 0%, 
+        rgba(243, 248, 253, 0.3) 50%,
+        rgba(223, 233, 243, 0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: -1;
+    }
+
+    .search-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      right: -50%;
+      bottom: -50%;
+      background: radial-gradient(circle at 30% 30%, 
+        rgba(255, 255, 255, 0.4) 0%, 
+        rgba(255, 255, 255, 0) 50%);
+      opacity: 0;
+      border-radius: 999px;
+      transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+      pointer-events: none;
+    }
+
     .search-btn.active {
       opacity: 1;
       transform: translateY(-50%) translateX(0) scale(1);
@@ -235,8 +354,32 @@
       animation: liquidFlow 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
+    .search-btn.active::before {
+      opacity: 1;
+      animation: glassLayerFlow 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.08s;
+    }
+
+    .search-btn.active::after {
+      opacity: 1;
+      animation: glassShineFlow 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s;
+    }
+
     .search-btn:hover {
-      background: linear-gradient(180deg, #ffffff 0%, #eef5fb 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(238, 245, 251, 0.92) 100%);
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 1),
+        inset 0 -1px 1px rgba(223, 233, 243, 0.4),
+        0 10px 28px -18px rgba(24, 55, 88, 0.5),
+        0 4px 12px -4px rgba(58, 88, 117, 0.2),
+        0 1px 2px rgba(255, 255, 255, 0.95);
+    }
+
+    .search-btn:hover::before {
+      opacity: 0.7;
+    }
+
+    .search-btn:hover::after {
+      opacity: 0.8;
     }
 
     @keyframes liquidFlow {
@@ -244,39 +387,96 @@
         opacity: 0;
         width: var(--search-blob-width);
         border-radius: 999px;
+        padding: 1.3rem 0.5rem;
         transform: translateY(-50%) translateX(calc(-1 * var(--search-start-shift))) scale(0.65);
-        filter: blur(0.8px);
+        filter: blur(1.2px) brightness(1.1);
       }
       18% {
-        opacity: 0.7;
+        opacity: 0.6;
         width: calc(var(--search-blob-width) * 1.1);
+        padding: 1.3rem 0.6rem;
         transform: translateY(-48%) translateX(calc(-1 * var(--search-start-shift) * 0.92)) scale(0.72);
-        filter: blur(0.6px);
+        filter: blur(0.9px) brightness(1.08);
       }
       38% {
-        opacity: 0.95;
+        opacity: 0.85;
         width: var(--search-mid-width);
+        padding: 1.3rem 1rem;
         transform: translateY(-46%) translateX(calc(-1 * var(--search-mid-shift))) scale(0.88);
-        filter: blur(0.35px);
+        filter: blur(0.5px) brightness(1.05);
       }
       58% {
-        opacity: 1;
+        opacity: 0.95;
         width: calc(var(--search-width) * 0.85);
+        padding: 1.3rem 1.5rem;
         transform: translateY(-48%) translateX(calc(-1 * var(--search-mid-shift) * 0.5)) scale(0.95);
-        filter: blur(0.15px);
+        filter: blur(0.25px) brightness(1.02);
       }
       78% {
         opacity: 1;
         width: calc(var(--search-width) * 1.03);
+        padding: 1.3rem 1.7rem;
         transform: translateY(-50%) translateX(0) scale(1.02);
-        filter: blur(0);
+        filter: blur(0) brightness(1);
       }
       100% {
         opacity: 1;
         width: var(--search-width);
         border-radius: 999px;
+        padding: 1.3rem 1.8rem;
         transform: translateY(-50%) translateX(0) scale(1);
+        filter: blur(0) brightness(1);
+      }
+    }
+
+    @keyframes glassLayerFlow {
+      0% {
+        opacity: 0;
+        transform: scale(0.85) translateX(-8%);
+        filter: blur(1.5px);
+      }
+      20% {
+        opacity: 0.4;
+        transform: scale(0.9) translateX(-5%);
+        filter: blur(1.2px);
+      }
+      45% {
+        opacity: 0.7;
+        transform: scale(0.96) translateX(-2%);
+        filter: blur(0.7px);
+      }
+      70% {
+        opacity: 0.9;
+        transform: scale(1.01) translateX(0);
+        filter: blur(0.3px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateX(0);
         filter: blur(0);
+      }
+    }
+
+    @keyframes glassShineFlow {
+      0% {
+        opacity: 0;
+        transform: scale(0.7) rotate(-5deg);
+      }
+      25% {
+        opacity: 0.3;
+        transform: scale(0.8) rotate(-3deg);
+      }
+      50% {
+        opacity: 0.6;
+        transform: scale(0.92) rotate(-1deg);
+      }
+      75% {
+        opacity: 0.85;
+        transform: scale(1.05) rotate(0deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
       }
     }
 
@@ -326,11 +526,57 @@
       }
 
       .search-btn {
-        padding: 0 1.3rem;
+        padding: 1.1rem 1.3rem;
         font-size: 0.9rem;
-        height: 3rem;
         width: 6.9rem;
         transform: translateY(-50%) translateX(calc(-1 * var(--search-start-shift))) scale(0.65);
+      }
+
+      @keyframes liquidFlow {
+        0% {
+          opacity: 0;
+          width: var(--search-blob-width);
+          border-radius: 999px;
+          padding: 1.1rem 0.4rem;
+          transform: translateY(-50%) translateX(calc(-1 * var(--search-start-shift))) scale(0.65);
+          filter: blur(1.2px) brightness(1.1);
+        }
+        18% {
+          opacity: 0.6;
+          width: calc(var(--search-blob-width) * 1.1);
+          padding: 1.1rem 0.5rem;
+          transform: translateY(-48%) translateX(calc(-1 * var(--search-start-shift) * 0.92)) scale(0.72);
+          filter: blur(0.9px) brightness(1.08);
+        }
+        38% {
+          opacity: 0.85;
+          width: var(--search-mid-width);
+          padding: 1.1rem 0.8rem;
+          transform: translateY(-46%) translateX(calc(-1 * var(--search-mid-shift))) scale(0.88);
+          filter: blur(0.5px) brightness(1.05);
+        }
+        58% {
+          opacity: 0.95;
+          width: calc(var(--search-width) * 0.85);
+          padding: 1.1rem 1.1rem;
+          transform: translateY(-48%) translateX(calc(-1 * var(--search-mid-shift) * 0.5)) scale(0.95);
+          filter: blur(0.25px) brightness(1.02);
+        }
+        78% {
+          opacity: 1;
+          width: calc(var(--search-width) * 1.03);
+          padding: 1.1rem 1.2rem;
+          transform: translateY(-50%) translateX(0) scale(1.02);
+          filter: blur(0) brightness(1);
+        }
+        100% {
+          opacity: 1;
+          width: var(--search-width);
+          border-radius: 999px;
+          padding: 1.1rem 1.3rem;
+          transform: translateY(-50%) translateX(0) scale(1);
+          filter: blur(0) brightness(1);
+        }
       }
     }
   </style>
@@ -349,7 +595,15 @@
           <path d="m21 21-4.35-4.35"></path>
         </svg>
         <input type="text" id="searchInput" placeholder="Search by address, name or transaction" />
-        <button class="action-btn" id="actionBtn" title="Slash to search">/</button>
+        <button class="action-btn" id="actionBtn" title="Slash to search" aria-label="Slash to search">
+          <span class="action-btn-slash">/</span>
+          <svg class="action-btn-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <title>paste-16</title>
+            <path fill="currentColor" fill-rule="evenodd" d="M14 8h-4a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1m-4-1c-1.1 0-2 .895-2 2v5c0 1.1.895 2 2 2h4c1.1 0 2-.895 2-2V9c0-1.1-.895-2-2-2z" clip-rule="evenodd"/>
+            <path fill="currentColor" d="M10 9.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/>
+            <path fill="currentColor" fill-rule="evenodd" d="M9 3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h5v1H2c-1.1 0-2-.895-2-2V4c0-1.1.895-2 2-2h1a1 1 0 0 1 1-1h.268a1.998 1.998 0 0 1 3.46 0h.268a1 1 0 0 1 1 1h1c1.1 0 2 .895 2 2v2h-1V4a1 1 0 0 0-1-1h-1zM4.27 2a1 1 0 0 0 .866-.499a1 1 0 0 1 1.734 0A1 1 0 0 0 7.736 2h.018a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-3.5a.25.25 0 0 1-.25-.25v-.5a.25.25 0 0 1 .25-.25h.017z" clip-rule="evenodd"/>
+          </svg>
+        </button>
         <button class="search-btn" id="searchBtn">Search</button>
       </div>
     </div>
@@ -433,11 +687,13 @@
 
     function updateActionBtn() {
       if (isActive) {
-        actionBtn.textContent = '⎌';
+        actionBtn.classList.add('is-paste');
         actionBtn.title = 'Paste';
+        actionBtn.setAttribute('aria-label', 'Paste');
       } else {
-        actionBtn.textContent = '/';
+        actionBtn.classList.remove('is-paste');
         actionBtn.title = 'Slash to search';
+        actionBtn.setAttribute('aria-label', 'Slash to search');
       }
     }
 
