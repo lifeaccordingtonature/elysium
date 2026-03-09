@@ -6,7 +6,7 @@
   <title>Elysium: minecraft crypto</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #eef3f8;
@@ -17,7 +17,6 @@
       --muted: #67819c;
       --brand: #1598ff;
       --shadow-soft: 0 16px 34px -20px rgba(26, 66, 110, 0.35);
-      --shadow-card: 0 8px 20px -14px rgba(20, 44, 70, 0.24);
     }
 
     * {
@@ -36,81 +35,48 @@
     }
 
     .container {
-      width: min(1220px, calc(100% - 2rem));
+      width: min(760px, calc(100% - 2rem));
       margin: 0 auto;
     }
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: #f6f9fc;
-      border-bottom: 1px solid #dce6f1;
-      box-shadow: 0 6px 18px -16px rgba(10, 32, 56, 0.4);
-    }
-
-    .nav {
+    .top {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.85rem 0;
+      justify-content: flex-end;
+      padding-top: 1rem;
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 1.08rem;
-      color: var(--text);
-      letter-spacing: 0.01em;
-    }
-
-    .logo {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: linear-gradient(130deg, #36b4ff 0, #0d87f4 60%, #0d60c1 100%);
-      box-shadow: 0 0 0 4px #dff0ff;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      text-decoration: none;
+    .wallet-btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 0.68rem 1rem;
+      font-family: inherit;
       font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      font-weight: 800;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: #35506b;
-      padding: 0.48rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid #d6e3f0;
-      background: #ffffff;
-    }
-
-    .nav-links a.active {
       color: #ffffff;
-      border-color: var(--brand);
-      background: linear-gradient(180deg, #21a5ff, #0c83f0);
+      background: linear-gradient(180deg, #29abff, #0e84f0);
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
     }
 
     main {
-      padding: 1rem 0 1.4rem;
+      padding: 4.8rem 0 1.4rem;
     }
 
-    .toolbar {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 0.8rem;
-      margin-bottom: 0.8rem;
+    .title {
+      margin: 0 0 0.5rem;
+      text-align: center;
+      font-size: clamp(1.6rem, 3.1vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      margin: 0 0 1rem;
+      text-align: center;
+      font-size: 0.92rem;
+      color: var(--muted);
     }
 
     .search {
@@ -155,352 +121,30 @@
       cursor: pointer;
     }
 
-    .quick-buttons {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .quick-buttons button {
-      border: 1px solid #d5e3f0;
-      background: #ffffff;
-      color: #3d5a76;
-      border-radius: 12px;
-      padding: 0 0.85rem;
-      font-size: 0.82rem;
-      font-weight: 700;
-      font-family: inherit;
-      cursor: pointer;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.65rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .mini-tile {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 0.72rem;
-      box-shadow: var(--shadow-card);
-    }
-
-    .mini-tile .name {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin-bottom: 0.25rem;
-    }
-
-    .mini-tile .val {
-      font-size: 1.08rem;
-      font-weight: 800;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 1.45fr 1fr;
-      gap: 0.85rem;
-    }
-
-    .panel {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 0.95rem;
-      box-shadow: var(--shadow-card);
-    }
-
-    h2 {
-      margin: 0;
-      font-size: 0.98rem;
-      font-weight: 800;
-    }
-
-    .sub {
-      margin: 0.16rem 0 0.95rem;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .bars {
-      display: grid;
-      grid-template-columns: repeat(56, 1fr);
-      gap: 3px;
-      align-items: end;
-      height: 180px;
-    }
-
-    .bar {
-      background: linear-gradient(180deg, #52bcff 0%, #168eef 100%);
-      border-radius: 3px 3px 0 0;
-      opacity: 0;
-      transform: translateY(7px);
-      animation: rise 0.5s ease forwards;
-    }
-
-    .axis {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 0.8rem;
-      font-size: 0.72rem;
-      color: #768da3;
-      font-family: "JetBrains Mono", monospace;
-    }
-
-    .rings {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.95rem;
-      align-items: center;
-    }
-
-    .donut {
-      width: 152px;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: conic-gradient(
-        #26a8ff 0 14%,
-        #54bfff 14% 27%,
-        #85d3ff 27% 39%,
-        #00c090 39% 50%,
-        #f4b13f 50% 60%,
-        #e8eff7 60% 100%
-      );
-      position: relative;
-    }
-
-    .donut::after {
-      content: "";
-      position: absolute;
-      inset: 24px;
-      border-radius: 50%;
-      background: #ffffff;
-      border: 1px solid #dce7f2;
-    }
-
-    .legend {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 0.46rem;
-      font-size: 0.82rem;
-    }
-
-    .legend li {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .left {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.42rem;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .mini-footer {
-      margin-top: 0.9rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.6rem;
-    }
-
-    .mini-bottom {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 0.68rem;
-      box-shadow: var(--shadow-card);
-    }
-
-    .mini-bottom .k {
-      color: var(--muted);
-      font-size: 0.73rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-    }
-
-    .mini-bottom .v {
-      margin-top: 0.2rem;
-      font-size: 0.95rem;
-      font-weight: 800;
-    }
-
-    @keyframes rise {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 1050px) {
-      .toolbar {
-        grid-template-columns: 1fr;
-      }
-
-      .quick-buttons {
-        overflow-x: auto;
-        padding-bottom: 2px;
-      }
-
-      .stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
     @media (max-width: 680px) {
-      .nav {
-        flex-direction: column;
-        align-items: flex-start;
+      main {
+        padding-top: 3.8rem;
       }
 
       .search {
-        grid-template-columns: 1fr;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      .rings {
-        grid-template-columns: 1fr;
-      }
-
-      .mini-footer {
         grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#">
-        <span class="logo"></span>
-        <span>Elysiumviewer</span>
-      </a>
-      <nav class="nav-links">
-        <a class="active" href="#">Explorer</a>
-        <a href="#">Price</a>
-        <a href="#">Stats</a>
-        <a href="#">Transactions</a>
-        <a href="#">Addresses</a>
-        <a href="#">Tools</a>
-      </nav>
-    </div>
-  </header>
+  <div class="container top">
+    <button type="button" class="wallet-btn">Connect wallet</button>
+  </div>
 
   <main class="container">
-    <section class="toolbar">
-      <div class="search">
-        <input type="text" placeholder="Search by address / tx hash / block / NFT / domain" />
-        <button type="button">Search</button>
-      </div>
-      <div class="quick-buttons">
-        <button type="button">Last Block</button>
-        <button type="button">Last Tx</button>
-        <button type="button">Config</button>
-        <button type="button">Radar</button>
-      </div>
-    </section>
-
-    <section class="stats">
-      <article class="mini-tile">
-        <div class="name">Toncoin Price</div>
-        <div class="val">$1.34</div>
-      </article>
-      <article class="mini-tile">
-        <div class="name">Market Cap</div>
-        <div class="val">$3.41B</div>
-      </article>
-      <article class="mini-tile">
-        <div class="name">Current TPS</div>
-        <div class="val">33.52</div>
-      </article>
-      <article class="mini-tile">
-        <div class="name">Processed / Hour</div>
-        <div class="val">110,371</div>
-      </article>
-    </section>
-
-    <section class="layout">
-      <article class="panel">
-        <h2>Transactions Chart</h2>
-        <p class="sub">Network activity over the last 24 hours</p>
-        <div class="bars" id="bars"></div>
-        <div class="axis">
-          <span>00:00</span>
-          <span>12:00</span>
-          <span>24:00</span>
-        </div>
-      </article>
-
-      <article class="panel">
-        <h2>Accounts Types</h2>
-        <p class="sub">Distribution of account contracts</p>
-        <div class="rings">
-          <div class="donut" aria-hidden="true"></div>
-          <ul class="legend">
-            <li><span class="left"><i class="dot" style="background:#26a8ff"></i>wallet_v4r2</span><strong>13%</strong></li>
-            <li><span class="left"><i class="dot" style="background:#54bfff"></i>jetton_wallet_v2</span><strong>12%</strong></li>
-            <li><span class="left"><i class="dot" style="background:#85d3ff"></i>nft_item</span><strong>11%</strong></li>
-            <li><span class="left"><i class="dot" style="background:#00c090"></i>jetton_wallet</span><strong>8%</strong></li>
-            <li><span class="left"><i class="dot" style="background:#f4b13f"></i>other</span><strong>40%</strong></li>
-          </ul>
-        </div>
-      </article>
-    </section>
-
-    <section class="mini-footer">
-      <article class="mini-bottom">
-        <div class="k">Accounts Types</div>
-        <div class="v">undetected 14%</div>
-      </article>
-      <article class="mini-bottom">
-        <div class="k">Transactions Types</div>
-        <div class="v">TextComment 29%</div>
-      </article>
-      <article class="mini-bottom">
-        <div class="k">Status</div>
-        <div class="v">Mainnet Online</div>
-      </article>
-    </section>
+    <h1 class="title">Elysiumviewer</h1>
+    <p class="subtitle">Search by address / tx hash / block / NFT / domain</p>
+    <div class="search">
+      <input type="text" placeholder="Start typing to search..." />
+      <button type="button">Search</button>
+    </div>
+    
   </main>
-
-  <script>
-    const barsRoot = document.getElementById("bars");
-    const points = [
-      28, 31, 24, 26, 35, 41, 46, 37, 54, 49, 59, 63, 68, 71,
-      62, 57, 64, 69, 52, 45, 49, 55, 61, 65, 72, 69, 58, 47,
-      42, 50, 56, 60, 67, 73, 70, 62, 53, 46, 40, 43, 48, 52,
-      57, 63, 66, 60, 54, 49, 46, 44, 50, 57, 61, 64, 59, 52
-    ];
-
-    points.forEach((point, idx) => {
-      const bar = document.createElement("div");
-      bar.className = "bar";
-      bar.style.height = `${point * 2.2}px`;
-      bar.style.animationDelay = `${idx * 0.01}s`;
-      barsRoot.appendChild(bar);
-    });
-  </script>
 </body>
 </html>
