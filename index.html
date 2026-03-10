@@ -38,6 +38,7 @@
         #ffffff;
       min-height: 100vh;
       position: relative;
+      isolation: isolate;
       overflow-x: hidden;
     }
 
@@ -58,7 +59,7 @@
         radial-gradient(13% 12% at 58% 14%, rgba(200, 228, 255, 0.26) 0%, rgba(200, 228, 255, 0) 66%);
       filter: blur(12px);
       animation: edgeDrift 18s ease-in-out infinite alternate;
-      z-index: -1;
+      z-index: -2;
     }
 
     body::after {
@@ -78,7 +79,35 @@
         radial-gradient(13% 12% at 62% 86%, rgba(188, 220, 248, 0.28) 0%, rgba(188, 220, 248, 0) 66%);
       filter: blur(12px);
       animation: edgeDriftBottom 20s ease-in-out infinite alternate;
+      z-index: -2;
+    }
+
+    .ambient-dots {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
       z-index: -1;
+    }
+
+    .ambient-dot {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      opacity: var(--opacity);
+      background:
+        radial-gradient(circle at 32% 32%, rgba(255, 255, 255, 0.95) 0%, rgba(232, 244, 255, 0.84) 24%, rgba(188, 222, 255, 0.5) 52%, rgba(188, 222, 255, 0) 100%);
+      filter: blur(var(--blur));
+      transform: translate3d(-50%, -50%, 0) scale(1);
+      transform-origin: center;
+      will-change: transform, opacity;
+      animation:
+        dotPulse var(--pulse-duration) ease-in-out infinite,
+        dotFloat var(--float-duration) ease-in-out infinite;
+      animation-delay: var(--delay), calc(var(--delay) * -0.65);
     }
 
     .container {
@@ -121,6 +150,8 @@
       flex-direction: column;
       justify-content: center;
       transform: translateY(-18vh);
+      position: relative;
+      z-index: 1;
     }
 
     .title {
@@ -128,13 +159,22 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.34rem;
+      gap: 0.18rem;
       font-size: clamp(1.5rem, 3.5vw, 2.4rem);
       font-weight: 800;
       letter-spacing: 0;
       color: #04070b;
       user-select: none;
       -webkit-user-select: none;
+    }
+
+    .title-text {
+      display: inline-block;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      transform: scaleX(1.02);
+      transform-origin: left center;
+      text-shadow: 0 0 0.01px currentColor;
     }
 
     .title-logo {
@@ -550,6 +590,36 @@
       }
     }
 
+    @keyframes dotPulse {
+      0%, 100% {
+        opacity: calc(var(--opacity) * 0.72);
+        transform: translate3d(-50%, -50%, 0) scale(0.9);
+      }
+      50% {
+        opacity: calc(var(--opacity) * 1.22);
+        transform: translate3d(-50%, -50%, 0) scale(1.22);
+      }
+    }
+
+    @keyframes dotFloat {
+      0%, 100% {
+        margin-left: 0;
+        margin-top: 0;
+      }
+      25% {
+        margin-left: var(--drift-x);
+        margin-top: calc(var(--drift-y) * -0.6);
+      }
+      50% {
+        margin-left: calc(var(--drift-x) * -0.45);
+        margin-top: var(--drift-y);
+      }
+      75% {
+        margin-left: calc(var(--drift-x) * 0.5);
+        margin-top: calc(var(--drift-y) * 0.35);
+      }
+    }
+
     @media (max-width: 680px) {
       body::before {
         background:
@@ -573,12 +643,20 @@
         filter: blur(10px);
       }
 
+      .ambient-dot {
+        filter: blur(calc(var(--blur) * 0.82));
+      }
+
       main {
         transform: translateY(-18vh);
       }
 
       .title {
-        gap: 0.24rem;
+        gap: 0.12rem;
+      }
+
+      .title-text {
+        transform: scaleX(1.015);
       }
 
       .title-logo {
@@ -678,12 +756,13 @@
   </style>
 </head>
 <body>
+  <div class="ambient-dots" id="ambientDots" aria-hidden="true"></div>
   <div class="top">
     <button type="button" class="wallet-btn">Connect Wallet</button>
   </div>
 
   <main class="container">
-    <h1 class="title"><img class="title-logo" src="./1773159329332.png" alt="Elysium logo" draggable="false" />Elysiumviewer</h1>
+    <h1 class="title"><img class="title-logo" src="./1773159329332.png" alt="Elysium logo" draggable="false" /><span class="title-text">Elysiumviewer</span></h1>
     <div class="search">
       <div class="search-input-wrapper">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -706,6 +785,7 @@
   </main>
 
   <script>
+    const ambientDots = document.getElementById('ambientDots');
     const input = document.getElementById('searchInput');
     const actionBtn = document.getElementById('actionBtn');
     const searchBtn = document.getElementById('searchBtn');
@@ -715,6 +795,60 @@
     let searchRevealTimer = null;
     const INPUT_COLLAPSE_DELAY = 460;
     const SEARCH_REVEAL_DELAY = 150;
+
+    function createAmbientDots() {
+      const totalDots = window.innerWidth <= 680 ? 30 : 46;
+      const dots = [];
+
+      for (let index = 0; index < totalDots; index += 1) {
+        const dot = document.createElement('span');
+        dot.className = 'ambient-dot';
+
+        const centerBias = index % 4 === 0;
+        const x = centerBias
+          ? 32 + Math.random() * 36
+          : 4 + Math.random() * 92;
+        const y = centerBias
+          ? 20 + Math.random() * 60
+          : 4 + Math.random() * 92;
+        const size = window.innerWidth <= 680
+          ? 2.4 + Math.random() * 3.8
+          : 3.2 + Math.random() * 6.4;
+        const blur = window.innerWidth <= 680
+          ? 3 + Math.random() * 5
+          : 4 + Math.random() * 7;
+        const opacity = 0.24 + Math.random() * 0.32;
+        const pulseDuration = 3.8 + Math.random() * 4.8;
+        const floatDuration = 8 + Math.random() * 10;
+        const driftX = (Math.random() * 18 + 6) * (Math.random() > 0.5 ? 1 : -1);
+        const driftY = (Math.random() * 18 + 6) * (Math.random() > 0.5 ? 1 : -1);
+        const delay = Math.random() * -6;
+
+        dot.style.setProperty('--x', `${x}%`);
+        dot.style.setProperty('--y', `${y}%`);
+        dot.style.setProperty('--size', `${size}rem`);
+        dot.style.setProperty('--blur', `${blur}px`);
+        dot.style.setProperty('--opacity', opacity.toFixed(3));
+        dot.style.setProperty('--pulse-duration', `${pulseDuration.toFixed(2)}s`);
+        dot.style.setProperty('--float-duration', `${floatDuration.toFixed(2)}s`);
+        dot.style.setProperty('--drift-x', `${driftX.toFixed(2)}px`);
+        dot.style.setProperty('--drift-y', `${driftY.toFixed(2)}px`);
+        dot.style.setProperty('--delay', `${delay.toFixed(2)}s`);
+
+        dots.push(dot);
+      }
+
+      ambientDots.replaceChildren(...dots);
+    }
+
+    let ambientResizeTimer = null;
+
+    createAmbientDots();
+
+    window.addEventListener('resize', () => {
+      clearTimeout(ambientResizeTimer);
+      ambientResizeTimer = setTimeout(createAmbientDots, 160);
+    });
 
     actionBtn.addEventListener('mousedown', (e) => {
       // Keep input focus while clicking the action button to avoid blur-reset race.
