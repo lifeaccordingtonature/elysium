@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Elysium Explorer: minecraft crypto</title>
+  <link rel="icon" type="image/png" href="./1773159329332.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -123,11 +124,22 @@
 
     .title {
       margin: 0 0 2.5rem;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
       font-size: clamp(1.5rem, 3.5vw, 2.4rem);
       font-weight: 1000;
       letter-spacing: 0;
       color: #04070b;
+    }
+
+    .title-logo {
+      width: clamp(2.25rem, 4vw, 3rem);
+      height: clamp(2.25rem, 4vw, 3rem);
+      object-fit: contain;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 8px 18px rgba(98, 140, 188, 0.22));
     }
 
     .search {
@@ -558,6 +570,15 @@
         transform: translateY(-18vh);
       }
 
+      .title {
+        gap: 0.55rem;
+      }
+
+      .title-logo {
+        width: 2.1rem;
+        height: 2.1rem;
+      }
+
       .search-input-wrapper input {
         padding: 1.1rem 4.5rem 1.1rem 3.5rem;
         font-size: 0.95rem;
@@ -655,7 +676,7 @@
   </div>
 
   <main class="container">
-    <h1 class="title">Elysiumviewer</h1>
+    <h1 class="title"><img class="title-logo" src="./1773159329332.png" alt="Elysium logo" />Elysiumviewer</h1>
     <div class="search">
       <div class="search-input-wrapper">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
