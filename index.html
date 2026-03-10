@@ -127,19 +127,25 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.8rem;
+      gap: 0.95rem;
       font-size: clamp(1.5rem, 3.5vw, 2.4rem);
       font-weight: 1000;
       letter-spacing: 0;
       color: #04070b;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .title-logo {
-      width: clamp(2.25rem, 4vw, 3rem);
-      height: clamp(2.25rem, 4vw, 3rem);
+      width: clamp(2.8rem, 5vw, 3.7rem);
+      height: clamp(2.8rem, 5vw, 3.7rem);
       object-fit: contain;
       flex: 0 0 auto;
       filter: drop-shadow(0 8px 18px rgba(98, 140, 188, 0.22));
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
     }
 
     .search {
@@ -571,12 +577,12 @@
       }
 
       .title {
-        gap: 0.55rem;
+        gap: 0.65rem;
       }
 
       .title-logo {
-        width: 2.1rem;
-        height: 2.1rem;
+        width: 2.5rem;
+        height: 2.5rem;
       }
 
       .search-input-wrapper input {
@@ -676,7 +682,7 @@
   </div>
 
   <main class="container">
-    <h1 class="title"><img class="title-logo" src="./1773159329332.png" alt="Elysium logo" />Elysiumviewer</h1>
+    <h1 class="title"><img class="title-logo" src="./1773159329332.png" alt="Elysium logo" draggable="false" />Elysiumviewer</h1>
     <div class="search">
       <div class="search-input-wrapper">
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
