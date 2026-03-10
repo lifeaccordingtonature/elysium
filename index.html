@@ -310,7 +310,13 @@
       opacity: 0;
       pointer-events: none;
       right: calc(var(--search-width) + 0.5rem);
-      transform: translateY(-50%) scale(0.7);
+      transform: translateY(-50%) translateX(-0.3rem) scale(0.68) rotate(-72deg);
+    }
+
+    .search-input-wrapper.has-text.is-morphing .action-btn {
+      opacity: 0;
+      right: calc(var(--search-width) + 0.72rem);
+      transform: translateY(-50%) translateX(-0.65rem) scale(0.44) rotate(-140deg);
     }
 
     .action-btn:hover {
@@ -623,6 +629,15 @@
       .action-btn {
         width: 2.8rem;
         height: 2.8rem;
+      }
+
+      .search-input-wrapper.has-text .action-btn {
+        transform: translateY(-50%) translateX(-0.22rem) scale(0.66) rotate(-68deg);
+      }
+
+      .search-input-wrapper.has-text.is-morphing .action-btn {
+        right: calc(var(--search-width) + 0.66rem);
+        transform: translateY(-50%) translateX(-0.5rem) scale(0.42) rotate(-132deg);
       }
 
       .search-btn {
